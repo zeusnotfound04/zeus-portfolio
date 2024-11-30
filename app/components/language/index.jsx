@@ -31,17 +31,7 @@ function GitLanguage() {
           </GlowCard>
         </>
 
-        <div className="md:col-span-2">
-          <GlowCard identifier="top-langs">
-            <Image
-              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${userData.githubUser}&layout=compact&theme=algolia&hide_border=true&&langs_count=8`}
-              width={1080}
-              height={560}
-              alt="github top-langs"
-              className="rounded-lg md:h-52 lg:h-64 w-full bg-primary-bg"
-            />
-          </GlowCard>
-        </div>
+        
       </div>
     </div>
   );

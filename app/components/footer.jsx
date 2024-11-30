@@ -11,26 +11,9 @@ function Footer() {
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <p className="text-sm">
-            Designed by <Link target="_blank" href="https://www.linkedin.com/in/vishesh-prajapati-520599302/" className="text-primary-icon">Zeus Notfound</Link>
+            Designed by <Link target="_blank" href="https://www.linkedin.com/in/vishesh-prajapati-520599302/" className="text-primary-icon">Zeus NotFound</Link>
           </p>
-          <div className="flex items-center gap-5">
-            <Link
-              target="_blank"
-              href="https://github.com/zeusnotfound04"
-              className="flex items-center gap-2 uppercase hover:text-primary-icon"
-            >
-              <IoStar />
-              <span>Star</span>
-            </Link>
-            <Link
-              target="_blank"
-              href="https://github.com/zeusnotfound04"
-              className="flex items-center gap-2 uppercase hover:text-primary-icon"
-            >
-              <CgGitFork />
-              <span>Fork</span>
-            </Link>
-          </div>
+          
         </div>
       </div>
     </div >
