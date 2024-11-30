@@ -75,13 +75,13 @@ export async function generateMetadata() {
   try {
     const profile = await getGitProfile();
     return {
-      title: `GitHub Profile of ${profile.name}`,
+      title: `Zeus NotFound`,
       description: profile.bio || "Explore this user's GitHub projects.",
     };
   } catch (error) {
     console.error('Error generating metadata:', error.message);
     return {
-      title: 'GitHub Profile',
+      title: 'Zeus NotFound',
       description: 'Explore GitHub projects.',
     };
   }
