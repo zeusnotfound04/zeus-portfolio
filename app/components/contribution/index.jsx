@@ -5,7 +5,7 @@ import SectionTitle from "../helper/section-title";
 function Contributions() {
   return (
     <div id="contributions" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
-      <SectionTitle title="Activity Graph" />
+      <SectionTitle title="Am I Consistent?" />
 
       <div className="w-full flex justify-center py-12">
         <GitHubCalendar

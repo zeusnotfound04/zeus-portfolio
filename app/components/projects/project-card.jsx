@@ -1,15 +1,22 @@
+"use client"
 import { colors } from "@/data/colors";
 import Link from "next/link";
 import { FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
 import { IoLinkSharp } from "react-icons/io5";
+import { useState } from "react";
 
 function ProjectCard({ project }) {
+  const [isDescriptionVisible, setDescriptionVisible] = useState(false);
+
+  const toggleDescription = () => {
+    setDescriptionVisible((prev) => !prev);
+  };
 
   return (
     <Link href={project.html_url || '#'} target="_blank">
-      <div className="p-8 h-48 flex flex-col justify-between bg-primary-bg">
-        <div className="">
+      <div className="p-8 h-auto flex flex-col justify-between bg-primary-bg">
+        <div>
           <div className="flex justify-between items-center">
             <p className="text-xl font-semibold capitalize text-primary-title">
               {project.name}
@@ -19,6 +26,20 @@ function ProjectCard({ project }) {
           <p className="line-clamp-2 text-primary-text my-5 text-sm">
             {project.description}
           </p>
+        </div>
+
+        {/* Description Toggle Section */}
+        <div className="my-4">
+          <button
+            onClick={toggleDescription}
+            className="text-primary-text text-sm font-semibold underline">
+            {isDescriptionVisible ? "Hide Description" : "Show More"}
+          </button>
+          {isDescriptionVisible && (
+            <p className="text-primary-text mt-2 text-sm">
+              {project.long_description || "No detailed description available."}
+            </p>
+          )}
         </div>
 
         <div className="flex justify-between items-center">

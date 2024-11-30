@@ -1,9 +1,7 @@
 import { userData } from "@/data/user-data";
 import Contributions from "./components/contribution/index.jsx";
 import HeroSection from "./components/hero-section";
-import GitLanguage from "./components/language";
-import Projects from "./components/projects";
-
+import Projects from "./components/projects"; 
 async function getGitProfile() {
   try {
     const res = await fetch(`https://api.github.com/users/${userData.githubUser}`, {
@@ -57,8 +55,8 @@ export default async function Home() {
     return (
       <>
         <HeroSection profile={profile} />
+        
         <Projects projects={projects.items} profile={profile} />
-        <GitLanguage />
         <Contributions />
       </>
     );

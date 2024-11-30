@@ -11,6 +11,8 @@
   "dependencies": {
     "@next/third-parties": "^15.0.3",
     "axios": "^1.6.8",
+    "framer-motion": "^11.12.0",
+    "gsap": "^3.12.5",
     "next": "^15.0.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

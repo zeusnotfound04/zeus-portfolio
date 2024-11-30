@@ -2,27 +2,30 @@ import { userData } from "@/data/user-data";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
-import { SiLeetcode } from "react-icons/si";
-
+import { SiDiscord } from "react-icons/si";
 function HeroSection({ profile }) {
 
   return (
-    <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
-      <div className="grid grid-cols-1 items-center md:grid-cols-2 lg:gap-12 gap-y-8">
+    <section className="relative flex flex-col items-center justify-between py-6 lg:py-12 mt-6">
+      <div className="grid grid-cols-1 items-center md:grid-cols-2 p-4  lg:gap-12 gap-y-8">
         <div className="flex flex-col items-start justify-center rounded-lg p-3 lg:py-5 lg:px-12 bg-primary-bg h-full">
           <div className="flex w-full justify-center">
-            <Image
-              src={profile.avatar_url}
-              width={128}
-              height={128}
-              alt={profile.name}
-              className="rounded-full transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
+          <Image
+            src="/images/avatar.jpg"
+            width={128}
+            height={128}
+            alt={profile.name}
+            className="rounded-full transition-all duration-300 ease-in-out transform hover:scale-125 hover:shadow-xl cursor-pointer"
+            quality={100}  // Max quality for sharpness
+            priority  // Load the image with priority if it's important on the page
+            layout="intrinsic" 
             />
+
           </div>
-          <p className="text-gray-300 text-sm lg:text-base my-4 lg:my-6 text-left px-4 sm:px-6 md:px-8 py-3 bg-gray-800 font-bold rounded-lg shadow-lg max-w-2xl mx-auto">
-          Hey, I’m Zeus! A 17-year-old full-stack dev from India, weaving code across the front and back-end with JavaScript, React, Node.js, and more. I’ve built everything from scratch, fine-tuned AI, and interned at Insight Ed, where .mjs files are my power-ups. When I’m not coding up a storm, I’m hanging out with the real legends—Doges, the ultimate sidekicks 🐾
+          <p className="text-gray-300 text-sm lg:text-base my-4 lg:my-6 text-left px-4 sm:px-6 md:px-8 py-3 bg-gray-800 font-bold rounded-lg shadow-lg max-w-2xl mx-auto" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          Hey, I’m Zeus! A 17-year-old Full-Stack dev from India, weaving code across the front and back-end with JavaScript, React, Node.js, and more. I’ve built everything from scratch, fine-tuned AI, and interned at Insight Ed, where .mjs files are my power-ups. When I’m not coding up a storm, I’m hanging out with the real legends—Doges, the ultimate sidekicks 🐾
           </p>
 
           <div className="w-full flex justify-center mt-2 items-center gap-5">
@@ -58,7 +61,7 @@ function HeroSection({ profile }) {
           </div>
 
           <div className="w-full justify-center flex items-center gap-3 mt-6">
-            <Link target="_blank" href={userData.resume || '#'} className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600">
+            <Link target="_blank" href="/CV/Vishesh_Prajapati_CV.pdf" download="Vishesh_Prajapati_CV.pdf" className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600">
               <button className="px-3 text-xs md:px-4 py-2 md:py-2.5 bg-[#0d1224] rounded-full border-none text-center font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out  md:font-semibold flex items-center gap-1 hover:gap-3">
                 <span>Get Resume</span>
                 <MdDownload size={16} />
