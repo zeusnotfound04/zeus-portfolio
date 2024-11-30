@@ -4,7 +4,8 @@ import Footer from './components/footer';
 import Navbar from './components/navbar';
 import './css/card.scss';
 import './css/globals.scss';
-import Head from 'next/head'; // Import the Head component
+import Head from 'next/head'; 
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
 
         </Head>
       <body className={inter.className}>
-        
+        <SpeedInsights/>
         <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] text-white">
           <Navbar />
           {children}
