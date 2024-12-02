@@ -1,179 +1,134 @@
-"use client"
-
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { MdCircle } from "react-icons/md";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
-function Skills() {
-  const [skillName, setSkill] = useState("");
-
-  // Defining skill data
-  const skillData = [
-    {
-      id: 1,
-      skillName: "JavaScript",
-      imageLink: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", // Replace with actual image links
-      proficiency: "Expert",
+const fadeInAnimationVariants = {
+  initial: {
+    opacity: 0,
+    y: 50,
+  },
+  animate: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.05 * index,
     },
-    {
-      id: 2,
-      skillName: "TypeScript",
-      imageLink: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", // Replace with actual image links
-      proficiency: "Advanced",
-    },
-    {
-        id: 3,
-      skillName: "React",
-      imageLink: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", // Replace with actual image links
-      proficiency: "Expert",
-    },
-    {
-        id: 4,
-      skillName: "Node.js",
-      imageLink: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg", // Replace with actual image links
-      proficiency: "Intermediate",
-    },
-    {
-        id: 5,
-      skillName: "Express.js",
-      imageLink: "https://www.peanutsquare.com/wp-content/uploads/2024/04/Express.png", // Replace with actual image links
-      proficiency: "Intermediate",
-    },
-    {
-        id: 6,
-      skillName: "Python",
-      imageLink: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg", // Replace with actual image links
-      proficiency: "Intermediate",
-    },
-    {
-        id: 7,
-      skillName: "MongoDB",
-      imageLink: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg", // Replace with actual image links
-      proficiency: "Intermediate",
-    },
-    {
-        id: 8,
-      skillName: "Tailwind CSS",
-      imageLink: "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg", // Replace with actual image links
-      proficiency: "Advanced",
-    },
-    {
-        id: 9,
-      skillName: "Docker",
-      imageLink: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", // Replace with actual image links
-      proficiency: "Intermediate",
-    },
-    {
-        id: 10,
-      skillName: "Bootstrap",
-      imageLink: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", // Replace with actual image links
-      proficiency: "Advanced",
-    },
-  ];
+  }),
+};
 
-  useEffect(() => {
-    const nodes = [].slice.call(document.querySelectorAll("li"), 0);
+gsap.registerPlugin(ScrollTrigger);
 
-    const directions = { 0: "top", 1: "right", 2: "bottom", 3: "left" };
-    const classNames = ["in", "out"]
-      .map((p) => Object.values(directions).map((d) => `${p}-${d}`))
-      .reduce((a, b) => a.concat(b));
+const skillNames = [
+  {
+    name: "React",
+    color: "#61DAFB", // React official color
+  },
+  {
+    name: "Nextjs.",
+    color: "#000000", // Black for Next.js
+  },
+  {
+    name: "Gsap",
+    color: "#88CE02", // GSAP official green
+  },
+  {
+    name: "JavaScript",
+    color: "#F0DB4F", // Yellow with less brightness for JavaScript
+  },
+  {
+    name: "Node.js",
+    color: "#43853D", // Node.js darker green
+  },
+  {
+    name: "TypeScript",
+    color: "#007ACC", // TypeScript official blue
+  },
+  {
+    name: "MongoDB",
+    color: "#4DB33D", // MongoDB official green
+  },
+  {
+    name: "Python",
+    color: "#3776AB", // Python darker blue
+  },
+  {
+    name: "Express.js",
+    color: "#303030", // Neutral dark gray for Express.js
+  },
+];
 
-    const getDirectionKey = (ev, node) => {
-      const { width, height, top, left } = node.getBoundingClientRect();
-      const l = ev.pageX - (left + window.pageXOffset);
-      const t = ev.pageY - (top + window.pageYOffset);
-      const x = l - (width / 2) * (width > height ? height / width : 1);
-      const y = t - (height / 2) * (height > width ? width / height : 1);
-      return Math.round(Math.atan2(y, x) / 1.57079633 + 5) % 4;
-    };
 
-    class Item {
-      constructor(element) {
-        this.element = element;
+export default function Skills() {
+  const component = useRef(null);
 
-        this.element.addEventListener("mouseover", (ev) =>
-          this.update(ev, "in"),
-        );
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: component.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 4,
+        },
+      });
 
-        this.element.addEventListener("mouseout", (ev) =>
-          this.update(ev, "out"),
-        );
-      }
+      tl.fromTo(
+        ".tech-row",
+        {
+          x: (index) => {
+            return index % 2 === 0
+              ? gsap.utils.random(600, 400)
+              : gsap.utils.random(-600, -400);
+          },
+        },
+        {
+          x: (index) => {
+            return index % 2 === 0
+              ? gsap.utils.random(-600, -400)
+              : gsap.utils.random(600, 400);
+          },
+          ease: "power1.inOut",
+        }
+      );
+    }, component);
+    return () => ctx.revert();
+  });
 
-      update(ev, prefix) {
-        this.element.classList.remove(...classNames);
-
-        this.element.classList.add(
-          `${prefix}-${directions[getDirectionKey(ev, this.element)]}`,
-        );
-      }
-    }
-
-    nodes.forEach((node) => new Item(node));
-  }, []);
 
   return (
-    <div className="flex relative flex-col text-center md:text-left xl:flex-row max-w-[2000px] xl:px-10 min-h-screen justify-center xl:space-y-0 mx-auto items-center z-0">
-      <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl cursor-default ">
+    <div
+      className="py-7 overflow-x-hidden scroll-mt-40"
+      ref={component}
+      id="skills"
+    >
+      <h2 className="text-5xl text-white flex justify-center font-lato font-extrabold uppercase pb-3">
         Skills
-      </h3>
-      <h3 className="absolute top-36 uppercase tracking-[3px] text-gray-500 text-sm cursor-default ">
-        hover for proficiency
-      </h3>
-      <div className="w-[90vw] h-[60vh] md:w-[40vw] flex justify-center items-center z-20">
-        <div className={`container `}>
-          <ul className={`scale-[70%] md:scale-100 `}>
-            {skillData.map((item) => {
-              return (
-                <motion.li
-                  key={item.id}
-                  className="rounded-lg antialiased self-center"
-                  onMouseEnter={() => {
-                    setSkill(item.skillName);
-                  }}
-                  onMouseLeave={() => {
-                    setSkill("");
-                  }}
-                  initial={{
-                    x: item.id % 2 === 0 ? 100 : -100,
-                  }}
-                  whileInView={{
-                    y: 0,
-                    x: 0,
-                  }}
-                  transition={{
-                    duration: 1,
-                  }}
-                >
-                  <a
-                    className="normal rounded-lg overflow-hidden antialiased"
-                    href="#"
-                  >
-                    <Image
-                      src={item.imageLink}
-                      alt="skillImage"
-                      fill
-                      priority
-                    />
-                  </a>
-                  <div className="info antialiased flex justify-center items-center">
-                    <h3>{item.proficiency}</h3>
-                  </div>
-                </motion.li>
-              );
-            })}
-          </ul>
+      </h2>
+      {skillNames.map((skill, skillIndex) => (
+        <div
+          key={skillIndex}
+          className="tech-row mb-8 flex items-center justify-center gap-4 text-slate-700"
+        >
+          {Array.from({ length: 15 }, (_, index) => (
+            <React.Fragment key={index}>
+              <span
+                className="text-7xl font-extrabold uppercase tracking-tighter"
+                style={{
+                  color: index === 7 && skill.color ? skill.color : "inherit",
+                }}
+              >
+                {skill.name}
+              </span>
+              <span className="text-5xl">
+                <MdCircle />
+              </span>
+            </React.Fragment>
+          ))}
         </div>
-      </div>
-
-      <div className="w-full absolute top-[30%] bg-[#F7AB0A]/10 left-0 h-[500px] skew-y-12 flex items-end justify-start xl:items-start  xl:justify-end ">
-        <h3 className="w-[35vw] sm:w-[32vw] h-fit text-xl md:text-[7vh] md:text-5xl text-gray-500/50 uppercase p-4 pt-11 pb-6 tracking-[20px]  transition-all ease-in-out duration-150 animate-[bounce_2s_ease-in-out_infinite]">
-          {skillName}
-        </h3>
-      </div>
+      ))}
     </div>
   );
 }
-
-export default Skills;
