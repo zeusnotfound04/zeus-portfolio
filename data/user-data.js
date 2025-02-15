@@ -6,6 +6,6 @@ export const userData = {
     twitter: 'https://x.com/Zeus_Notfound',
     discord: 'https://discord.gg/2dGyNmUPwa',
     resume: "https://drive.google.com/file/d/1eyutpKFFhJ9X-qpQGKhUNnVRkB5Wer00/view?usp=sharing",
-    skills: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Express.js', 'Python', 'MongoDB', 'Tailwind CSS', 'Docker', 'Bootstrap'],
+    skills: ['JavaScript', 'TypeScript', 'Next.js', 'React', 'Node.js', 'Express.js', 'Python', "PostgreSQL", 'MongoDB', 'Tailwind CSS', "Prisma", 'Docker', 'Bootstrap'],
     timezone: '+6'
   };
